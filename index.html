@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Venus Energy Test | Shukra Aura Quiz</title>
+    <!-- Fonts from Astrovidhya.com: Playfair Display (Serif) & Jost (Sans-serif) -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Jost:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            /* Colors matched from Astrovidhya.com */
+            --primary: #634A4A;
+            /* Deep Maroon/Brown */
+            --secondary: #E6B325;
+            /* Traditional Gold accent */
+            --accent: #FF5252;
+            /* Alert/Badge red */
+            --bg-cream: #FFFAEF;
+            /* Premium cream background */
+            --text-dark: #212121;
+            --text-light: #634A4A;
+            --card-bg: #FFFFFF;
+            --border-radius: 8px;
+            /* Matching their button radius */
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Jost', sans-serif;
+            background-color: var(--bg-cream);
+            background-image: radial-gradient(circle at 50% 50%, rgba(230, 179, 37, 0.05) 0%, transparent 70%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-dark);
+            padding: 20px;
+        }
+
+        /* Container Styling */
+        .quiz-container {
+            width: 100%;
+            max-width: 600px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 45px;
+            position: relative;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .step {
+            display: none;
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+
+        .step.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.98);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Header Styling */
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            margin-bottom: 8px;
+            text-align: center;
+            color: var(--primary);
+        }
+
+        p.subtitle {
+            text-align: center;
+            opacity: 0.7;
+            margin-bottom: 35px;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            color: var(--primary);
+        }
+
+        /* Progress Bar */
+        .progress-wrapper {
+            width: 100%;
+            height: 4px;
+            background: rgba(99, 74, 74, 0.1);
+            border-radius: 2px;
+            margin-bottom: 40px;
+            overflow: hidden;
+        }
+
+        #progress {
+            height: 100%;
+            width: 0%;
+            background: var(--primary);
+            transition: width 0.4s ease;
+        }
+
+        /* Questions & Options */
+        .question-text {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .hindi-text {
+            display: block;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        .english-text {
+            display: block;
+            font-size: 0.95rem;
+            opacity: 0.6;
+            font-weight: 500;
+        }
+
+        .options-grid {
+            display: grid;
+            gap: 15px;
+        }
+
+        .option-card {
+            background: #fff;
+            border: 1px solid #eee;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+        }
+
+        .option-card:hover {
+            border-color: var(--secondary);
+            background: #FFFAEF;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .option-card.selected {
+            background: #634A4A;
+            border-color: #634A4A;
+            color: #fff;
+        }
+
+        .option-marker {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ddd;
+            border-radius: 50%;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .selected .option-marker {
+            border-color: #fff;
+            background: #E6B325;
+        }
+
+        .option-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .opt-hindi {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .opt-english {
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+
+        .selected .opt-english {
+            opacity: 0.9;
+        }
+
+        /* Form Inputs */
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--primary);
+        }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 25px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            color: var(--text-dark);
+            font-size: 1rem;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: var(--secondary);
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 20px;
+            background: var(--primary);
+            border: none;
+            border-radius: var(--border-radius);
+            color: #fff;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 10px;
+        }
+
+        .btn-primary:hover {
+            background: #4a3737;
+            box-shadow: 0 5px 15px rgba(99, 74, 74, 0.2);
+        }
+
+        /* Result Styles */
+        .result-card {
+            text-align: center;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 12px 25px;
+            border-radius: 50px;
+            margin: 25px 0;
+            font-weight: 600;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .status-weak {
+            background: #f8dbdb;
+            color: #d63031;
+        }
+
+        .status-moderate {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-strong {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .rec-box {
+            background: #FFFAEF;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            margin-top: 25px;
+            border: 1px solid rgba(230, 179, 37, 0.3);
+            text-align: left;
+        }
+
+        .rec-header {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .rec-text {
+            font-size: 1rem;
+            line-height: 1.7;
+            opacity: 0.9;
+            color: var(--text-dark);
+        }
+
+        /* Overlays */
+        .success-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 12px;
+            z-index: 100;
+            display: none;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .success-icon {
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 480px) {
+            .quiz-container {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .hindi-text {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="quiz-container">
+        <div class="progress-wrapper">
+            <div id="progress"></div>
+        </div>
+
+        <div id="quiz-flow">
+            <!-- Step: Welcome -->
+            <div class="step active" id="step-start">
+                <h1>Venus Energy Test</h1>
+                <p class="subtitle">Discover your true Shukra Aura strength for beauty, luxury, and harmony.</p>
+
+                <div
+                    style="background: #FFFAEF; padding: 25px; border-radius: 10px; margin-bottom: 30px; border: 1px solid rgba(0,0,0,0.03);">
+                    <ul style="list-style: none; font-size: 0.95rem; line-height: 2.4; color: var(--primary);">
+                        <li>✨ Natural Attraction Score</li>
+                        <li>💎 Luxury & Comfort Readiness</li>
+                        <li>🤝 Relationship Compatibility</li>
+                        <li>🌸 Activation Remedies</li>
+                    </ul>
+                </div>
+
+                <button class="btn-primary" onclick="nextStep()">Start Aura Test</button>
+            </div>
+
+            <!-- Q1 -->
+            <div class="step" id="step-1">
+                <div class="question-text">
+                    <span class="hindi-text">🧪 क्या आपको लगता है कि आपकी personality में natural attraction कम
+                        है?</span>
+                    <span class="english-text">Do you feel your personality lacks natural attraction?</span>
+                </div>
+                <div class="options-grid">
+                    <div class="option-card" onclick="selectOption(1, 8, this)">
+                        <div class="option-marker"></div>
+                        <div class="option-content">
+                            <span class="opt-hindi">हाँ, अक्सर ऐसा लगता है</span>
+                            <span class="opt-english">Yes, I feel this often</span>
+                        </div>
+                    </div>
+                    <div class="option-card" onclick="selectOption(1, 6, this)">
+                        <div class="option-marker"></div>
+                        <div class="option-content">
+                            <span class="opt-hindi">कभी-कभी ऐसा लगता है</span>
+                            <span class="opt-english">Sometimes I feel this</span>
+                        </div>
+                    </div>
+                    <div class="option-card" onclick="selectOption(1, 4, this)">
+                        <div class="option-marker"></div>
+                        <div class="option-content">
+                            <span class="opt-hindi">नहीं, मैं confident feel करता/करती हूँ</span>
+                            <span class="opt-english">No, I feel confident</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Q2 -->
+            <div class="step" id="step-2">
+                <div class="question-text">
+                    <span class="hindi-text">🧪 आपके relationships कितने harmonious हैं?</span>
+                    <span class="english-text">How harmonious are your relationships?</span>
+                </div>
+                <div class="options-grid">
+                    <div class="option-card" onclick="selectOption(2, 8, this)">
+                        <div class="option-marker"></div>
+                        <div class="option-content">
+                            <span class="opt-hindi">अक्सर problems और distance रहती है</span>
+                            <span class="opt-english">Often there are conflicts and distance</span>
+                        </div>
+                    </div>
+                    <div class="option-card" onclick="selectOption(2, 6, this)">
+                        <div class="option-marker"></div>
+                        <div class="option-content">
+                            <span class="opt-hindi">कभी-कभी issues आते हैं</span>
+                            <span class="opt-english">Sometimes there are issues</span>
+                        </div>
+                    </div>
+                    <div class="option-card" onclick="selectOption(2, 4, this)">
+                        <div class="option-marker"></div>
+                        <div class="option-content">
+                            <span class="opt-hindi">काफी balanced और smooth हैं</span>
+                            <span class="opt-english">Mostly balanced and smooth</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Q3 -->
+            <div class="step" id="step-3">
+                <div class="question-text">
+                    <span class="hindi-text">🧪 क्या आपकी life में luxury और comfort आसानी से आता है?</span>
+                    <span class="english-text">Do luxury and comfort come easily in your life?</span>
+                </div>
+                <div class="options-grid">
+                    <div class="option-card" onclick="selectOption(3, 8, this)">
+                        <div class="option-marker"></div>
+                        <div class="option-content">
+                            <span class="opt-hindi">नहीं, struggle करना पड़ता है</span>
+                            <span class="opt-english">No, I struggle for it</span>
+                        </div>
+                    </div>
+                    <div class="option-card" onclick="selectOption(3, 6, this)">
+                        <div class="option-marker"></div>
+                        <div class="option-content">
+                            <span class="opt-hindi">कभी-कभी आता है</span>
+                            <span class="opt-english">Sometimes it comes</span>
+                        </div>
+                    </div>
+                    <div class="option-card" onclick="selectOption(3, 4, this)">
+                        <div class="option-marker"></div>
+                        <div class="option-content">
+                            <span class="opt-hindi">हाँ, mostly flow में रहता है</span>
+                            <span class="opt-english">Yes, it flows easily</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Q4 -->
+            <div class="step" id="step-4">
+                <div class="question-text">
+                    <span class="hindi-text">🧪 Social situations में आपका confidence कैसा रहता है?</span>
+                    <span class="english-text">How confident do you feel in social situations?</span>
+                </div>
+                <div class="options-grid">
+                    <div class="option-card" onclick="selectOption(4, 8, this)">
+                        <div class="option-marker"></div>
+                        <div class="option-content">
+                            <span class="opt-hindi">Low, मैं nervous feel करता/करती हूँ</span>
+                            <span class="opt-english">Low, I feel nervous</span>
+                        </div>
+                    </div>
+                    <div class="option-card" onclick="selectOption(4, 6, this)">
+                        <div class="option-marker"></div>
+                        <div class="option-content">
+                            <span class="opt-hindi">Average, situation पर depend करता है</span>
+                            <span class="opt-english">Average, depends on situation</span>
+                        </div>
+                    </div>
+                    <div class="option-card" onclick="selectOption(4, 4, this)">
+                        <div class="option-marker"></div>
+                        <div class="option-content">
+                            <span class="opt-hindi">High, मैं confident feel करता/करती हूँ</span>
+                            <span class="opt-english">High, I feel confident</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Q5 -->
+            <div class="step" id="step-5">
+                <div class="question-text">
+                    <span class="hindi-text">🧪 क्या आपको fragrance, beauty और aesthetics से connection feel होता
+                        है?</span>
+                    <span class="english-text">Do you feel connected to fragrance, beauty, and aesthetics?</span>
+                </div>
+                <div class="options-grid">
+                    <div class="option-card" onclick="selectOption(5, 8, this)">
+                        <div class="option-marker"></div>
+                        <div class="option-content">
+                            <span class="opt-hindi">बहुत कम interest है</span>
+                            <span class="opt-english">Very little interest</span>
+                        </div>
+                    </div>
+                    <div class="option-card" onclick="selectOption(5, 6, this)">
+                        <div class="option-marker"></div>
+                        <div class="option-content">
+                            <span class="opt-hindi">थोड़ा interest है</span>
+                            <span class="opt-english">Some interest</span>
+                        </div>
+                    </div>
+                    <div class="option-card" onclick="selectOption(5, 4, this)">
+                        <div class="option-marker"></div>
+                        <div class="option-content">
+                            <span class="opt-hindi">बहुत ज्यादा पसंद है</span>
+                            <span class="opt-english">Strongly connected / love it</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lead Form -->
+            <div class="step" id="step-lead">
+                <h1>Complete Analysis</h1>
+                <p class="subtitle">Where should we send your results and remedy?</p>
+
+                <form id="lead-form" onsubmit="handleLeadSubmit(event)">
+                    <label>Full Name</label>
+                    <input type="text" id="user-name" placeholder="Your Name" required>
+
+                    <label>WhatsApp Number</label>
+                    <input type="tel" id="user-mobile" placeholder="Your whatsapp number" required>
+
+                    <button type="submit" class="btn-primary" id="submit-btn">Get Aura Scores</button>
+                </form>
+            </div>
+
+            <!-- Result -->
+            <div class="step" id="step-result">
+                <div class="result-card">
+                    <h1>Aura Result</h1>
+                    <div id="status-display"></div>
+
+                    <div class="rec-box">
+                        <div class="rec-header">
+                            <span>📜</span> Activation Remedy:
+                        </div>
+                        <p class="rec-text" id="result-recommendation"></p>
+                    </div>
+
+                    <button class="btn-primary"
+                        style="background: transparent; border: 1px solid #ddd; color: var(--primary); margin-top: 30px;"
+                        onclick="location.reload()">Retake Test</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="success-overlay" id="success-message">
+            <div class="success-icon">✦</div>
+            <h2>Calculating...</h2>
+            <p>Matching your energy with local celestial data.</p>
+        </div>
+    </div>
+
+    <script>
+        const APP_SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL';
+        let currentStep = 0;
+        const totalSteps = 7;
+        let selections = {};
+
+        function nextStep() {
+            document.querySelectorAll('.step')[currentStep].classList.remove('active');
+            currentStep++;
+            document.querySelectorAll('.step')[currentStep].classList.add('active');
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const progress = (currentStep / (totalSteps - 1)) * 100;
+            document.getElementById('progress').style.width = progress + '%';
+        }
+
+        function selectOption(qId, score, element) {
+            const parent = element.parentElement;
+            parent.querySelectorAll('.option-card').forEach(card => card.classList.remove('selected'));
+            element.classList.add('selected');
+            selections[qId] = score;
+            setTimeout(nextStep, 300);
+        }
+
+        async function handleLeadSubmit(event) {
+            event.preventDefault();
+            const score = Object.values(selections).reduce((a, b) => a + b, 0);
+
+            let resultData = {};
+            if (score >= 28) {
+                resultData = {
+                    title: "Shukra Energy Weak",
+                    class: "status-weak",
+                    rec: "Your attraction and luxury energy shows signs of fatigue. We recommend a Venus Activation Remedy to restore the flow of abundance."
+                };
+            } else if (score >= 21) {
+                resultData = {
+                    title: "Shukra Energy Moderate",
+                    class: "status-moderate",
+                    rec: "Your aura is balanced but has room for spiritual growth. A simple luxury mindfulness practice can help stabilize this energy."
+                };
+            } else {
+                resultData = {
+                    title: "Shukra Energy Strong",
+                    class: "status-strong",
+                    rec: "Exceptional aura detected! Your natural attraction and comfort energy are in perfect harmony. Maintain this balance with gratitude."
+                };
+            }
+
+            document.getElementById('submit-btn').innerHTML = "SAVING...";
+            document.getElementById('success-message').style.display = 'flex';
+
+            // Result Display
+            const percentage = Math.round((score / 40) * 100);
+            const statusDiv = document.getElementById('status-display');
+            statusDiv.innerHTML = `
+                <div class="status-badge ${resultData.class}">${resultData.title}</div>
+                <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary); margin-bottom: 20px;">
+                    Aura Strength: ${percentage}%
+                </div>
+            `;
+            document.getElementById('result-recommendation').innerText = resultData.rec;
+
+            setTimeout(() => {
+                document.getElementById('success-message').style.display = 'none';
+                nextStep();
+            }, 1200);
+        }
+    </script>
+</body>
+
+</html>
