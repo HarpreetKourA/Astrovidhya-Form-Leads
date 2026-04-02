@@ -20,7 +20,7 @@ function doPost(e) {
     const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
     const nextRow = sheet.getLastRow() + 1;
 
-    const data = JSON.parse(e.postData.contents);
+    const data = e.parameter; // Handles both JSON and Form submissions reliably
     const row = [];
 
     // Map incoming JSON keys to columns based on headers
