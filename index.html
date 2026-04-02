@@ -613,8 +613,9 @@
                     </div>
 
                     <button class="btn-primary"
+                        id="final-shop-btn"
                         style="background: var(--primary); color: #fff; margin-top: 30px; font-weight: 700; border: none; letter-spacing: 1px; font-family: 'Playfair Display', serif; font-size: 1.2rem; text-transform: none;"
-                        onclick="window.open('https://astrovidhya.com', '_blank')">
+                        onclick="window.open('https://astrovidhya.com/products/shukra-aura-venus-activation-attar', '_blank')">
                         👉 Shop Shukra Aura Attar
                     </button>
                 </div>
@@ -673,19 +674,31 @@
                 resultData = {
                     title: "Shukra Energy Strong",
                     class: "status-strong",
-                    rec: "Exceptional aura detected! Your natural attraction and comfort energy are in perfect harmony. Maintain this balance with gratitude."
+                    rec: `
+                        <ul style="list-style: none; padding-left: 0; text-align: left; margin: 0 auto; display: inline-block;">
+                            <li>👉 Good aura and attraction energy</li>
+                            <li>👉 Maintain balance</li>
+                        </ul>`
                 };
             } else if (score >= 20) {
                 resultData = {
                     title: "Shukra Energy Moderate",
                     class: "status-moderate",
-                    rec: "Your aura is balanced but has room for spiritual growth. A simple luxury mindfulness practice or remedy can help stabilize this energy."
+                    rec: `
+                        <ul style="list-style: none; padding-left: 0; text-align: left; margin: 0 auto; display: inline-block;">
+                            <li>👉 Slight imbalance</li>
+                            <li>👉 Improvement possible with simple remedies</li>
+                        </ul>`
                 };
             } else {
                 resultData = {
                     title: "Shukra Energy Weak",
                     class: "status-weak",
-                    rec: "Your attraction and luxury energy shows signs of fatigue. We recommend a Venus Activation Remedy to restore the flow of abundance."
+                    rec: `
+                        <ul style="list-style: none; padding-left: 0; text-align: left; margin: 0 auto; display: inline-block;">
+                            <li>👉 Attraction, love, luxury areas may need attention</li>
+                            <li>👉 Recommended: Venus Activation Remedy</li>
+                        </ul>`
                 };
             }
 
@@ -700,7 +713,7 @@
                 <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary); margin-bottom: 15px;">
                     Aura Strength: ${percentage}%
                 </div>
-                <p style="font-size: 1rem; line-height: 1.6; color: var(--primary); margin-bottom: 25px; opacity: 0.9;">
+                <p style="font-size: 1.05rem; line-height: 1.7; color: var(--primary); margin-bottom: 25px; font-weight: 500;">
                     ${resultData.rec}
                 </p>
             `;
