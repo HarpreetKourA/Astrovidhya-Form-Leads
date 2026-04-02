@@ -79,6 +79,23 @@
             }
         }
 
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+
+            50% {
+                transform: scale(1.1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+        }
+
         /* Header Styling */
         h1 {
             font-family: 'Playfair Display', serif;
@@ -298,6 +315,7 @@
             margin-bottom: 12px;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 12px;
         }
 
@@ -360,19 +378,18 @@
             <!-- Step: Welcome -->
             <div class="step active" id="step-start">
                 <h1>Venus Energy Test</h1>
-                <p class="subtitle">Discover your true Shukra Aura strength for beauty, luxury, and harmony.</p>
+                <p class="subtitle">Take this <b>30-second Venus Energy Test</b> to discover:</p>
 
                 <div
                     style="background: #FFFAEF; padding: 25px; border-radius: 10px; margin-bottom: 30px; border: 1px solid rgba(0,0,0,0.03);">
-                    <ul style="list-style: none; font-size: 0.95rem; line-height: 2.4; color: var(--primary);">
-                        <li>✨ Natural Attraction Score</li>
-                        <li>💎 Luxury & Comfort Readiness</li>
-                        <li>🤝 Relationship Compatibility</li>
-                        <li>🌸 Activation Remedies</li>
+                    <ul style="list-style: none; font-size: 1.05rem; line-height: 2.2; color: var(--primary);">
+                        <li>✨ Your Attraction Energy</li>
+                        <li>✨ Relationship Harmony</li>
+                        <li>✨ Luxury & Prosperity Flow</li>
                     </ul>
                 </div>
 
-                <button class="btn-primary" onclick="nextStep()">Start Aura Test</button>
+                <button class="btn-primary" onclick="nextStep()">👇 Start the Venus Energy Test</button>
             </div>
 
             <!-- Q1 -->
@@ -383,7 +400,7 @@
                     <span class="english-text">Do you feel your personality lacks natural attraction?</span>
                 </div>
                 <div class="options-grid">
-                    <div class="option-card" onclick="selectOption(1, 8, this)">
+                    <div class="option-card" onclick="selectOption(1, 4, this)">
                         <div class="option-marker"></div>
                         <div class="option-content">
                             <span class="opt-hindi">हाँ, अक्सर ऐसा लगता है</span>
@@ -397,7 +414,7 @@
                             <span class="opt-english">Sometimes I feel this</span>
                         </div>
                     </div>
-                    <div class="option-card" onclick="selectOption(1, 4, this)">
+                    <div class="option-card" onclick="selectOption(1, 8, this)">
                         <div class="option-marker"></div>
                         <div class="option-content">
                             <span class="opt-hindi">नहीं, मैं confident feel करता/करती हूँ</span>
@@ -414,7 +431,7 @@
                     <span class="english-text">How harmonious are your relationships?</span>
                 </div>
                 <div class="options-grid">
-                    <div class="option-card" onclick="selectOption(2, 8, this)">
+                    <div class="option-card" onclick="selectOption(2, 4, this)">
                         <div class="option-marker"></div>
                         <div class="option-content">
                             <span class="opt-hindi">अक्सर problems और distance रहती है</span>
@@ -428,7 +445,7 @@
                             <span class="opt-english">Sometimes there are issues</span>
                         </div>
                     </div>
-                    <div class="option-card" onclick="selectOption(2, 4, this)">
+                    <div class="option-card" onclick="selectOption(2, 8, this)">
                         <div class="option-marker"></div>
                         <div class="option-content">
                             <span class="opt-hindi">काफी balanced और smooth हैं</span>
@@ -445,7 +462,7 @@
                     <span class="english-text">Do luxury and comfort come easily in your life?</span>
                 </div>
                 <div class="options-grid">
-                    <div class="option-card" onclick="selectOption(3, 8, this)">
+                    <div class="option-card" onclick="selectOption(3, 4, this)">
                         <div class="option-marker"></div>
                         <div class="option-content">
                             <span class="opt-hindi">नहीं, struggle करना पड़ता है</span>
@@ -459,7 +476,7 @@
                             <span class="opt-english">Sometimes it comes</span>
                         </div>
                     </div>
-                    <div class="option-card" onclick="selectOption(3, 4, this)">
+                    <div class="option-card" onclick="selectOption(3, 8, this)">
                         <div class="option-marker"></div>
                         <div class="option-content">
                             <span class="opt-hindi">हाँ, mostly flow में रहता है</span>
@@ -476,7 +493,7 @@
                     <span class="english-text">How confident do you feel in social situations?</span>
                 </div>
                 <div class="options-grid">
-                    <div class="option-card" onclick="selectOption(4, 8, this)">
+                    <div class="option-card" onclick="selectOption(4, 4, this)">
                         <div class="option-marker"></div>
                         <div class="option-content">
                             <span class="opt-hindi">Low, मैं nervous feel करता/करती हूँ</span>
@@ -490,7 +507,7 @@
                             <span class="opt-english">Average, depends on situation</span>
                         </div>
                     </div>
-                    <div class="option-card" onclick="selectOption(4, 4, this)">
+                    <div class="option-card" onclick="selectOption(4, 8, this)">
                         <div class="option-marker"></div>
                         <div class="option-content">
                             <span class="opt-hindi">High, मैं confident feel करता/करती हूँ</span>
@@ -508,7 +525,7 @@
                     <span class="english-text">Do you feel connected to fragrance, beauty, and aesthetics?</span>
                 </div>
                 <div class="options-grid">
-                    <div class="option-card" onclick="selectOption(5, 8, this)">
+                    <div class="option-card" onclick="selectOption(5, 4, this)">
                         <div class="option-marker"></div>
                         <div class="option-content">
                             <span class="opt-hindi">बहुत कम interest है</span>
@@ -522,7 +539,7 @@
                             <span class="opt-english">Some interest</span>
                         </div>
                     </div>
-                    <div class="option-card" onclick="selectOption(5, 4, this)">
+                    <div class="option-card" onclick="selectOption(5, 8, this)">
                         <div class="option-marker"></div>
                         <div class="option-content">
                             <span class="opt-hindi">बहुत ज्यादा पसंद है</span>
@@ -532,19 +549,42 @@
                 </div>
             </div>
 
+            <!-- Calculating Slide -->
+            <div class="step" id="step-calculating">
+                <div class="result-card">
+                    <div class="success-icon" style="font-size: 4rem; animation: pulse 1.5s infinite;">✦</div>
+                    <h1 style="margin-top: 20px;">Analyzing Your Aura...</h1>
+                    <p class="subtitle">Matching your energy with Venusian celestial patterns.</p>
+
+                    <div
+                        style="width: 100%; height: 6px; background: rgba(99, 74, 74, 0.1); border-radius: 10px; margin-top: 30px; overflow: hidden;">
+                        <div id="calculating-progress"
+                            style="height: 100%; width: 0%; background: var(--secondary); transition: width 2s linear;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Lead Form -->
             <div class="step" id="step-lead">
-                <h1>Complete Analysis</h1>
-                <p class="subtitle">Where should we send your results and remedy?</p>
+                <h1 style="font-size: 1.8rem;">Aapka Venus Energy Result Ready Hai!</h1>
+                <p class="subtitle">Bas ek step aur… apna personalized result unlock karein</p>
 
                 <form id="lead-form" onsubmit="handleLeadSubmit(event)">
-                    <label>Full Name</label>
-                    <input type="text" id="user-name" placeholder="Your Name" required>
+                    <label>First Name</label>
+                    <input type="text" id="user-name" placeholder="Enter your first name" required>
 
                     <label>WhatsApp Number</label>
-                    <input type="tel" id="user-mobile" placeholder="Your whatsapp number" required>
+                    <input type="tel" id="user-mobile" placeholder="10-digit mobile number" required pattern="[0-9]{10}"
+                        maxlength="10" title="Please enter a 10-digit WhatsApp number">
 
-                    <button type="submit" class="btn-primary" id="submit-btn">Get Aura Scores</button>
+                    <button type="submit" class="btn-primary" id="submit-btn" style="margin-bottom: 20px;">Get Aura
+                        Scores</button>
+
+                    <p
+                        style="text-align: center; font-size: 0.85rem; color: var(--primary); opacity: 0.8; font-weight: 500;">
+                        🔒 Astro Vidya – 10 Years of Trusted Spiritual Remedies
+                    </p>
                 </form>
             </div>
 
@@ -553,17 +593,30 @@
                 <div class="result-card">
                     <h1>Aura Result</h1>
                     <div id="status-display"></div>
-
-                    <div class="rec-box">
-                        <div class="rec-header">
-                            <span>📜</span> Activation Remedy:
+                    <div class="rec-header"
+                        style="color: #634A4A; font-weight: 700; margin-bottom: 15px; font-size: 1.1rem; justify-content: center;">
+                        ✨ Recommended Remedy </div>
+                    <div class="rec-box" style="text-align: left; padding: 20px 25px;">
+                        <div>
+                            <span
+                                style="color: #634A4A; font-size: 1.4rem; display: block; margin-top: 5px; font-weight: 800; letter-spacing: -0.5px;">Shukra
+                                Aura – Venus Activation Attar</span>
                         </div>
-                        <p class="rec-text" id="result-recommendation"></p>
+                        <div class="rec-text">
+                            <p style="font-weight: 600; margin-bottom: 8px; color: #634A4A;">How to use:</p>
+                            <ul style="list-style: none; padding-left: 0; line-height: 2.2; font-size: 0.95rem;">
+                                <li>✦ Apne dono haathon ke Shukra Parvat (palm) par lagayein</li>
+                                <li>✦ Kaan ke piche apply karein</li>
+                                <li>✦ Gale par halka apply karein</li>
+                            </ul>
+                        </div>
                     </div>
 
                     <button class="btn-primary"
-                        style="background: transparent; border: 1px solid #ddd; color: var(--primary); margin-top: 30px;"
-                        onclick="location.reload()">Retake Test</button>
+                        style="background: var(--primary); color: #fff; margin-top: 30px; font-weight: 700; border: none; letter-spacing: 1px; font-family: 'Playfair Display', serif; font-size: 1.2rem; text-transform: none;"
+                        onclick="window.open('https://astrovidhya.com', '_blank')">
+                        👉 Shop Shukra Aura Attar
+                    </button>
                 </div>
             </div>
         </div>
@@ -578,14 +631,24 @@
     <script>
         const APP_SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL';
         let currentStep = 0;
-        const totalSteps = 7;
+        const totalSteps = 8; // Start, 5 Questions, Calculating, Lead Form, Result (Total 9 elements, but currentStep goes to 8)
         let selections = {};
 
         function nextStep() {
             document.querySelectorAll('.step')[currentStep].classList.remove('active');
             currentStep++;
-            document.querySelectorAll('.step')[currentStep].classList.add('active');
+            const nextElem = document.querySelectorAll('.step')[currentStep];
+            nextElem.classList.add('active');
             updateProgress();
+
+            // Auto-advance if it's the calculating slide
+            if (nextElem.id === 'step-calculating') {
+                setTimeout(() => {
+                    document.getElementById('calculating-progress').style.width = '100%';
+                }, 100);
+
+                setTimeout(nextStep, 2500);
+            }
         }
 
         function updateProgress() {
@@ -608,42 +671,42 @@
             let resultData = {};
             if (score >= 28) {
                 resultData = {
-                    title: "Shukra Energy Weak",
-                    class: "status-weak",
-                    rec: "Your attraction and luxury energy shows signs of fatigue. We recommend a Venus Activation Remedy to restore the flow of abundance."
-                };
-            } else if (score >= 21) {
-                resultData = {
-                    title: "Shukra Energy Moderate",
-                    class: "status-moderate",
-                    rec: "Your aura is balanced but has room for spiritual growth. A simple luxury mindfulness practice can help stabilize this energy."
-                };
-            } else {
-                resultData = {
                     title: "Shukra Energy Strong",
                     class: "status-strong",
                     rec: "Exceptional aura detected! Your natural attraction and comfort energy are in perfect harmony. Maintain this balance with gratitude."
                 };
+            } else if (score >= 20) {
+                resultData = {
+                    title: "Shukra Energy Moderate",
+                    class: "status-moderate",
+                    rec: "Your aura is balanced but has room for spiritual growth. A simple luxury mindfulness practice or remedy can help stabilize this energy."
+                };
+            } else {
+                resultData = {
+                    title: "Shukra Energy Weak",
+                    class: "status-weak",
+                    rec: "Your attraction and luxury energy shows signs of fatigue. We recommend a Venus Activation Remedy to restore the flow of abundance."
+                };
             }
 
-            document.getElementById('submit-btn').innerHTML = "SAVING...";
-            document.getElementById('success-message').style.display = 'flex';
+            document.getElementById('submit-btn').innerHTML = "SAVING RESULTS...";
+            document.getElementById('submit-btn').disabled = true;
 
             // Result Display
             const percentage = Math.round((score / 40) * 100);
             const statusDiv = document.getElementById('status-display');
             statusDiv.innerHTML = `
                 <div class="status-badge ${resultData.class}">${resultData.title}</div>
-                <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary); margin-bottom: 20px;">
+                <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary); margin-bottom: 15px;">
                     Aura Strength: ${percentage}%
                 </div>
+                <p style="font-size: 1rem; line-height: 1.6; color: var(--primary); margin-bottom: 25px; opacity: 0.9;">
+                    ${resultData.rec}
+                </p>
             `;
-            document.getElementById('result-recommendation').innerText = resultData.rec;
 
-            setTimeout(() => {
-                document.getElementById('success-message').style.display = 'none';
-                nextStep();
-            }, 1200);
+            // Optional: Mock saving delay or real fetch if URL is provided
+            setTimeout(nextStep, 1000);
         }
     </script>
 </body>
