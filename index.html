@@ -629,7 +629,7 @@
     </div>
 
     <script>
-        const APP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby92BuE_zAtOpGFukl95Tppcd-oIOp1jqdcNogJt8dEvxgYKJd1vKr5fnd1Wf70gfCj/exec';
+        const APP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxUPKISULHKjBgXGOmoAcGKn5scXXz33VYi35tXmniqLIK8FlHrTp1xgIRPZSQy0lfp/exec';
         let currentStep = 0;
         const totalSteps = 8; // Start, 5 Questions, Calculating, Lead Form, Result (Total 9 elements, but currentStep goes to 8)
         let selections = {};
@@ -708,7 +708,7 @@
             const urlData = new URLSearchParams({
                 Name: document.getElementById('user-name').value,
                 Mobile: document.getElementById('user-mobile').value,
-                Score: score
+                Score: percentage + "%"
             });
 
             // Send to Google Sheets as a POST with form-urlencoded data
