@@ -52,6 +52,6 @@ function doPost(e) {
 function setup() {
   const doc = SpreadsheetApp.getActiveSpreadsheet();
   const sheet = doc.getSheets()[0];
-  const headers = ['Timestamp', 'Name', 'Mobile', 'Score', 'Recommendation'];
+  const headers = ['Timestamp', 'Name', 'Mobile', 'Score'];
   sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
 }
